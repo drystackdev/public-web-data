@@ -19,13 +19,9 @@ type VariantsConfig = Record<string, VariantOptions>;
 
 /** The chosen value for each variant axis - `undefined`/`null` (or simply
  * omitted) falls back to `defaultVariants`. */
-type VariantSelection<V extends VariantsConfig> = {
-  [K in keyof V]?: keyof V[K] | null;
-};
+type VariantSelection<V extends VariantsConfig> = { [K in keyof V]?: keyof V[K] | null };
 
-type CompoundVariant<V extends VariantsConfig> = {
-  [K in keyof V]?: keyof V[K];
-} & { class: ClassValue };
+type CompoundVariant<V extends VariantsConfig> = { [K in keyof V]?: keyof V[K] } & { class: ClassValue };
 
 export interface CvaConfig<V extends VariantsConfig> {
   variants?: V;
@@ -37,23 +33,16 @@ export interface CvaConfig<V extends VariantsConfig> {
   compoundVariants?: CompoundVariant<V>[];
 }
 
-export type CvaProps<V extends VariantsConfig> = VariantSelection<V> & {
-  class?: ClassValue;
-};
+export type CvaProps<V extends VariantsConfig> = VariantSelection<V> & { class?: ClassValue };
 
 /** `VariantProps<typeof buttonVariants>` - the prop bag a `cva()` result
  * accepts, extracted from the function itself so a component's own props
  * interface can `extends VariantProps<typeof buttonVariants>` instead of
  * redeclaring every variant axis by hand - the same role shadcn's own
  * `VariantProps` type plays. */
-export type VariantProps<T extends (props?: any) => string> = NonNullable<
-  Parameters<T>[0]
->;
+export type VariantProps<T extends (props?: any) => string> = NonNullable<Parameters<T>[0]>;
 
-export function cva<V extends VariantsConfig>(
-  base: ClassValue,
-  config?: CvaConfig<V>,
-) {
+export function cva<V extends VariantsConfig>(base: ClassValue, config?: CvaConfig<V>) {
   const variants = config?.variants;
   const defaultVariants = config?.defaultVariants;
   const compoundVariants = config?.compoundVariants;
@@ -62,10 +51,8 @@ export function cva<V extends VariantsConfig>(
     const picked: ClassValue[] = [];
     if (variants) {
       for (const axis of Object.keys(variants) as (keyof V)[]) {
-        const chosen = (props?.[axis] ?? defaultVariants?.[axis]) as
-          keyof VariantOptions | undefined;
-        if (chosen !== undefined && chosen !== null)
-          picked.push(variants[axis]![chosen]);
+        const chosen = (props?.[axis] ?? defaultVariants?.[axis]) as keyof VariantOptions | undefined;
+        if (chosen !== undefined && chosen !== null) picked.push(variants[axis]![chosen]);
       }
     }
     if (compoundVariants && variants) {
@@ -74,10 +61,7 @@ export function cva<V extends VariantsConfig>(
         // unconstrained (matches regardless of what's chosen for it).
         const matches = (Object.keys(variants) as (keyof V)[]).every((axis) => {
           const required = rule[axis];
-          return (
-            required === undefined ||
-            (props?.[axis] ?? defaultVariants?.[axis]) === required
-          );
+          return required === undefined || (props?.[axis] ?? defaultVariants?.[axis]) === required;
         });
         if (matches) picked.push(rule.class);
       }
