@@ -10,11 +10,13 @@ export default async function HomePage() {
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: NO_FLASH_SCRIPT }} />
-
       <div class="min-h-dvh bg-background text-foreground">
         <header class="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
           <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-            <a href="/" class="flex items-center gap-2 font-semibold tracking-tight">
+            <a
+              href="/"
+              class="flex items-center gap-2 font-semibold tracking-tight"
+            >
               <span class="flex h-6 w-6 items-center justify-center rounded bg-primary text-xs font-bold text-primary-foreground">
                 d
               </span>
@@ -65,7 +67,9 @@ export default async function HomePage() {
                   href={home.heroPrimaryHref || "#tinh-nang"}
                   class="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90"
                 >
-                  <span {...dryBind(home.$.heroPrimaryLabel)}>{home.heroPrimaryLabel}</span>
+                  <span {...dryBind(home.$.heroPrimaryLabel)}>
+                    {home.heroPrimaryLabel}
+                  </span>
                 </a>
               ) : null}
               {home.heroSecondaryLabel ? (
@@ -73,7 +77,9 @@ export default async function HomePage() {
                   href={home.heroSecondaryHref || "#kien-truc"}
                   class="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-6 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground"
                 >
-                  <span {...dryBind(home.$.heroSecondaryLabel)}>{home.heroSecondaryLabel}</span>
+                  <span {...dryBind(home.$.heroSecondaryLabel)}>
+                    {home.heroSecondaryLabel}
+                  </span>
                 </a>
               ) : null}
             </div>
@@ -95,10 +101,16 @@ export default async function HomePage() {
 
           {/* Features */}
           <section id="tinh-nang" class="scroll-mt-20 py-20">
-            <h2 {...dryBind(home.$.featuresHeading)} class="text-2xl font-bold tracking-tight sm:text-3xl">
+            <h2
+              {...dryBind(home.$.featuresHeading)}
+              class="text-2xl font-bold tracking-tight sm:text-3xl"
+            >
               {home.featuresHeading}
             </h2>
-            <p {...dryBind(home.$.featuresDescription)} class="mt-2 max-w-2xl text-muted-foreground">
+            <p
+              {...dryBind(home.$.featuresDescription)}
+              class="mt-2 max-w-2xl text-muted-foreground"
+            >
               {home.featuresDescription}
             </p>
             {home.features?.length ? (
@@ -108,7 +120,9 @@ export default async function HomePage() {
                     key={i}
                     class="rounded-xl border border-border bg-card p-5 transition-colors hover:border-ring"
                   >
-                    <h3 class="font-semibold text-card-foreground">{feature.heading}</h3>
+                    <h3 class="font-semibold text-card-foreground">
+                      {feature.heading}
+                    </h3>
                     <div
                       class="mt-2 text-sm leading-relaxed text-muted-foreground"
                       dangerouslySetInnerHTML={{ __html: feature.body ?? "" }}
@@ -120,16 +134,24 @@ export default async function HomePage() {
           </section>
 
           {/* Architecture */}
-          <section id="kien-truc" class="scroll-mt-20 border-t border-border py-20">
+          <section
+            id="kien-truc"
+            class="scroll-mt-20 border-t border-border py-20"
+          >
             <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
               <div>
-                <h2 {...dryBind(home.$.architectureHeading)} class="text-2xl font-bold tracking-tight sm:text-3xl">
+                <h2
+                  {...dryBind(home.$.architectureHeading)}
+                  class="text-2xl font-bold tracking-tight sm:text-3xl"
+                >
                   {home.architectureHeading}
                 </h2>
                 <div
                   {...dryBind(home.$.architectureDescription)}
                   class="mt-2 text-muted-foreground"
-                  dangerouslySetInnerHTML={{ __html: home.architectureDescription ?? "" }}
+                  dangerouslySetInnerHTML={{
+                    __html: home.architectureDescription ?? "",
+                  }}
                 />
               </div>
               {home.architecture?.length ? (
@@ -139,7 +161,9 @@ export default async function HomePage() {
                       key={i}
                       class="grid gap-1 px-5 py-4 sm:grid-cols-[10rem_1fr] sm:gap-4"
                     >
-                      <dt class="text-sm font-medium text-muted-foreground">{row.label}</dt>
+                      <dt class="text-sm font-medium text-muted-foreground">
+                        {row.label}
+                      </dt>
                       <dd class="text-sm text-card-foreground">{row.value}</dd>
                     </div>
                   ))}
