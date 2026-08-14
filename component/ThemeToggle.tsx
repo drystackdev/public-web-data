@@ -55,7 +55,9 @@ export default function ThemeToggle({ class: className }: ThemeToggleProps) {
       type="button"
       role="switch"
       aria-checked={isDark}
-      aria-label={isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
+      aria-label={
+        isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"
+      }
       title={isDark ? "Giao diện tối" : "Giao diện sáng"}
       onClick={() => {
         const next: Theme = isDark ? "light" : "dark";
